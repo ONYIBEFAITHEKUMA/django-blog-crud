@@ -1,22 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Blog - Post List</title>
-</head>
-<body>
-    <h1>All Blog Posts</h1>
-    {% for post in posts %}
-        <div>
-           <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
+{% extends 'blog/base.html' %}
 
-            <p>{{ post.content|truncatewords:30 }}</p>
-            <p><strong>Author:</strong> {{ post.author.username }}</p>
-            <p><strong>Created:</strong> {{ post.created_at }}</p>
-            <hr>
-        </div>
-    {% empty %}
-        <p>No posts available.</p>
-    {% endfor %}
-</body>
-</html>
+{% block title %}Posts - My Blog{% endblock %}
+
+{% block content %}
+<h1 class="my-4">Blog Posts</h1>
+{% for post in posts %}
+    <div class="blog-post">
+        <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
+        <p class="text-muted">by {{ post.author.username }} on {{ post.created_at|date:"F j, Y" }}</p>
+        <p>{{ post.content|truncatewords:30 }}</p>
+        <a class="btn btn-primary" href="{% url 'post_detail' post.pk %}">Read More</a>
+    </div>
+{% empty %}
+    <p>No posts yet.</p>
+{% endfor %}
+{% endblock %}
