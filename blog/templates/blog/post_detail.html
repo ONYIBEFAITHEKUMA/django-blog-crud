@@ -26,6 +26,7 @@
         <p>No comments yet.</p>
     {% endfor %}
     <a href="{% url 'post_update' post.pk %}">Edit Post</a>
+    <a href="{% url 'post_delete' post.pk %}">Delete Post</a>
 
     <a href="{% url 'post_list' %}">Back to all posts</a>
 </body>
