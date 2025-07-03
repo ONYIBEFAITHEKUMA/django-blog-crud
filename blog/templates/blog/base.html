@@ -30,6 +30,13 @@
         <div class="container">
             <a class="navbar-brand" href="{% url 'post_list' %}">My Blog</a>
         </div>
+        {% if user.is_authenticated %}
+  <span class="navbar-text">Hi, {{ user.username }}!</span>
+  <a class="btn btn-outline-light ms-2" href="{% url 'logout' %}">Logout</a>
+{% else %}
+  <a class="btn btn-outline-light" href="{% url 'login' %}">Login</a>
+{% endif %}
+
     </nav>
     <div class="container">
         {% block content %}

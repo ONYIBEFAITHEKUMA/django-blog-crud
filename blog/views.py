@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post
 from .forms import PostForm, CommentForm
+from django.contrib.auth.decorators import login_required
+
 
 def post_list(request):
     posts = Post.objects.all().order_by('-created_at')
@@ -50,3 +52,15 @@ def post_delete(request, pk):
     return render(request, 'blog/post_delete.html', {'post': post})
 
 
+
+@login_required
+def post_create(request):
+    ...
+
+@login_required
+def post_update(request, pk):
+    ...
+
+@login_required
+def post_delete(request, pk):
+    ...
